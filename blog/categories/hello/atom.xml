@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Hello | My Dev Blog]]></title>
+  <link href="http://scottmkroberts.github.io/blog/categories/hello/atom.xml" rel="self"/>
+  <link href="http://scottmkroberts.github.io/"/>
+  <updated>2013-08-19T13:42:12+01:00</updated>
+  <id>http://scottmkroberts.github.io/</id>
+  <author>
+    <name><![CDATA[Scott Roberts]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hello World]]></title>
+    <link href="http://scottmkroberts.github.io/blog/2013/08/19/hello-world/"/>
+    <updated>2013-08-19T13:34:00+01:00</updated>
+    <id>http://scottmkroberts.github.io/blog/2013/08/19/hello-world</id>
+    <content type="html"><![CDATA[<h3>Blog coming soon.</h3>
+]]></content>
+  </entry>
+  
+</feed>
