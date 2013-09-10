@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: iOS | My Dev Blog]]></title>
+  <link href="scottr.me/blog/categories/ios/atom.xml" rel="self"/>
+  <link href="scottr.me/"/>
+  <updated>2013-09-10T01:11:27+01:00</updated>
+  <id>scottr.me/</id>
+  <author>
+    <name><![CDATA[Scott Roberts]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Multiple Rounded Corners With UIBezierPath]]></title>
+    <link href="scottr.me/blog/2013/09/05/multiple-rounded-corners-with-uibezierpath/"/>
+    <updated>2013-09-05T17:23:00+01:00</updated>
+    <id>scottr.me/blog/2013/09/05/multiple-rounded-corners-with-uibezierpath</id>
+    <content type="html"><![CDATA[<p>Sometime ago I ran into a problem where I wanted to round one side of a UIView but leave the other size square. I had a good search around the internet and could not find a solution that was not crazy complicated than it should have been. Really all I wanted to do was round more than one corner but not all corners.</p>
+
+<h2>The options I thought I had was</h2>
+
+<ul>
+<li>UIRectCornerTopLeft</li>
+<li>UIRectCornerTopRight</li>
+<li>UIRectCornerBottomLeft</li>
+<li>UIRectCornerBottomRight</li>
+<li>UIRectCornerAllCorners</li>
+</ul>
+
+
+<p>But what if I wanted UIRectCornerTopLeft &amp; UIRectCornerTopRight To me there was no way I could only select one of these options. I did try the following, Which results in a compiler error.</p>
+
+<p>``` objective-c Incorrect Code Block
+  [UIBezierPath bezierPathWithRoundedRect:self.view.bounds</p>
+
+<pre><code>                      byRoundingCorners:UIRectCornerTopRight | UIRectCornerTopLeft, UIRectCornerBottomRight
+                           cornerRadii:CGSizeMake(10.0,10.0)];
+</code></pre>
+
+<p>```</p>
+
+<p>So I went off and tried crazy custom UIBezierPath to try and draw my own and not using bezierPathWithRoundedRect. After much failure I randomly tried the Wonderful &lsquo;|&rsquo; character knowing sometimes I can chain commands using this character.</p>
+
+<h2>Well Look at that</h2>
+
+<p>It worked! I had no ideas you could use &lsquo;|&rsquo; to add more than one option which could be a valuable piece of information in the future when also using methods that allow me to pass in enum options.</p>
+
+<h2>Some examples</h2>
+
+<p><img class="<a" src="href="http://scottr.me/images/postImages/UIBiezerPathImage.png">http://scottr.me/images/postImages/UIBiezerPathImage.png</a>" width="250" height="350" title="UIBiezerPathImage" ></p>
+
+<p>So View 1 is set like the following.</p>
+
+<p>``` objective-c View 1 Code Block</p>
+
+<pre><code>//set view 1
+-(UIBezierPath *)roundTopLeftOfView:(UIView *)view{
+// Create the path (with only the top-left corner rounded)
+return [UIBezierPath bezierPathWithRoundedRect:view.bounds
+                                               byRoundingCorners:UIRectCornerTopLeft
+                                                     cornerRadii:CGSizeMake(10.0, 10.0)];
+}
+
+CAShapeLayer *maskLayerView1 = [CAShapeLayer layer];
+maskLayerView1.frame = _view1.bounds;
+maskLayerView1.path = [self roundTopLeftOfView:_view1].CGPath;
+_view1.layer.mask = maskLayerView1;
+</code></pre>
+
+<p>```</p>
+
+<p>Some different methods you could call are</p>
+
+<p>``` objective-c View 1 Code Block
+<strong>Round just the top right of a view</strong></p>
+
+<pre><code>    return  [UIBezierPath bezierPathWithRoundedRect:view.bounds
+                                                   byRoundingCorners:UIRectCornerTopRight
+                                                         cornerRadii:CGSizeMake(10.0, 10.0)];
+</code></pre>
+
+<p>```</p>
+
+<p>``` objective-c View 1 Code Block
+<strong>Round just the whole top of a view</strong></p>
+
+<pre><code>return  [UIBezierPath bezierPathWithRoundedRect:view.bounds
+                              byRoundingCorners:UIRectCornerTopRight | UIRectCornerTopLeft
+                                    cornerRadii:CGSizeMake(10.0, 10.0)];
+</code></pre>
+
+<p>```</p>
+
+<p><strong>Round just the top and bottom right of a view</strong>
+``` objective-c View 1 Code Block</p>
+
+<pre><code>return  [UIBezierPath bezierPathWithRoundedRect:view.bounds
+                              byRoundingCorners:UIRectCornerTopRight | UIRectCornerTopLeft | UIRectCornerBottomRight
+                                    cornerRadii:CGSizeMake(10.0, 10.0)]; 
+</code></pre>
+
+<p>```</p>
+
+<p><strong>Round everything!</strong>
+``` objective-c View 1 Code Block</p>
+
+<pre><code>return  [UIBezierPath bezierPathWithRoundedRect:view.bounds
+                              byRoundingCorners:UIRectCornerAllCorners
+                                    cornerRadii:CGSizeMake(10.0, 10.0)];
+</code></pre>
+
+<p>```</p>
+
+<p>So there we go a very simple solution to a problem that took me way to long to solve, maybe it might help someone else somewhere.</p>
+
+<p>Thanks for reading,
+You can follow me on twitter at <a href="https://twitter.com/scottmkroberts">@scottmkroberts</a>  or App.Net <a href="https://alpha.app.net/scottr">@scottr</a></p>
+]]></content>
+  </entry>
+  
+</feed>

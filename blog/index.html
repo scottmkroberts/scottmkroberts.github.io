@@ -9,7 +9,7 @@
   <meta name="author" content="Scott Roberts">
 
   
-  <meta name="description" content=" Hello World Aug 19th, 2013 Hello Blog coming soon. ">
+  <meta name="description" content="Multiple Rounded Corners With UIBezierPath Sep 5th, 2013 iOS Sometime ago I ran into a problem where I wanted to round one side of a UIView but &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -53,7 +53,7 @@
         </span>
        
            <span class="blue_dark">
-             comming soon
+             Mobile and Web Developement
            </span>
        
     </a></li>
@@ -67,6 +67,179 @@
     <div id="content">
       
 
+
+  
+  <article class="listing">
+    <header>
+  
+  <h1 class="beta">
+    <a href="/blog/2013/09/05/multiple-rounded-corners-with-uibezierpath/">Multiple Rounded Corners With UIBezierPath</a>
+  </h1>
+  
+
+  
+  <div class="meta clearfix">
+    
+
+
+
+
+
+
+
+
+  
+
+
+<time class="pull-left" datetime="2013-09-05T17:23:00+01:00" pubdate data-updated="true"><i class="icon-calendar"></i> Sep 5<span>th</span>, 2013</time>
+    
+
+
+
+  
+  <div class="pull-left">
+    <i class="icon-tags"></i>
+    <ul class="tags unstyled">
+    
+      <li><a href="/blog/categories/iOS/">iOS</a></li>
+    
+    </ul>
+  </div>
+  
+
+    
+  </div>
+  
+</header>
+
+
+
+
+  <p>Sometime ago I ran into a problem where I wanted to round one side of a UIView but leave the other size square. I had a good search around the internet and could not find a solution that was not crazy complicated than it should have been. Really all I wanted to do was round more than one corner but not all corners.</p>
+
+<h2>The options I thought I had was</h2>
+
+<ul>
+<li>UIRectCornerTopLeft</li>
+<li>UIRectCornerTopRight</li>
+<li>UIRectCornerBottomLeft</li>
+<li>UIRectCornerBottomRight</li>
+<li>UIRectCornerAllCorners</li>
+</ul>
+
+
+<p>But what if I wanted UIRectCornerTopLeft &amp; UIRectCornerTopRight To me there was no way I could only select one of these options. I did try the following, Which results in a compiler error.</p>
+
+<figure class='code'><figcaption><span>Incorrect Code Block</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'>  <span class="p">[</span><span class="n">UIBezierPath</span> <span class="nl">bezierPathWithRoundedRect:</span><span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span>
+</span><span class='line'>                          <span class="nl">byRoundingCorners:</span><span class="n">UIRectCornerTopRight</span> <span class="o">|</span> <span class="n">UIRectCornerTopLeft</span><span class="p">,</span> <span class="n">UIRectCornerBottomRight</span>
+</span><span class='line'>                               <span class="nl">cornerRadii:</span><span class="n">CGSizeMake</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span><span class="mf">10.0</span><span class="p">)];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So I went off and tried crazy custom UIBezierPath to try and draw my own and not using bezierPathWithRoundedRect. After much failure I randomly tried the Wonderful &lsquo;|&rsquo; character knowing sometimes I can chain commands using this character.</p>
+
+<h2>Well Look at that</h2>
+
+<p>It worked! I had no ideas you could use &lsquo;|&rsquo; to add more than one option which could be a valuable piece of information in the future when also using methods that allow me to pass in enum options.</p>
+
+<h2>Some examples</h2>
+
+<p><img src="http://scottr.me/images/postImages/UIBiezerPathImage.png" width="250" height="350" title="UIBiezerPathImage" ></p>
+
+<p>So View 1 is set like the following.</p>
+
+<figure class='code'><figcaption><span>View 1 Code Block</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="c1">//set view 1</span>
+</span><span class='line'><span class="k">-</span><span class="p">(</span><span class="n">UIBezierPath</span> <span class="o">*</span><span class="p">)</span><span class="nf">roundTopLeftOfView:</span><span class="p">(</span><span class="n">UIView</span> <span class="o">*</span><span class="p">)</span><span class="nv">view</span><span class="p">{</span>
+</span><span class='line'><span class="c1">// Create the path (with only the top-left corner rounded)</span>
+</span><span class='line'><span class="k">return</span> <span class="p">[</span><span class="n">UIBezierPath</span> <span class="nl">bezierPathWithRoundedRect:</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span>
+</span><span class='line'>                                               <span class="nl">byRoundingCorners:</span><span class="n">UIRectCornerTopLeft</span>
+</span><span class='line'>                                                     <span class="nl">cornerRadii:</span><span class="n">CGSizeMake</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)];</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">CAShapeLayer</span> <span class="o">*</span><span class="n">maskLayerView1</span> <span class="o">=</span> <span class="p">[</span><span class="n">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+</span><span class='line'><span class="n">maskLayerView1</span><span class="p">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">_view1</span><span class="p">.</span><span class="n">bounds</span><span class="p">;</span>
+</span><span class='line'><span class="n">maskLayerView1</span><span class="p">.</span><span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="nl">roundTopLeftOfView:</span><span class="n">_view1</span><span class="p">].</span><span class="n">CGPath</span><span class="p">;</span>
+</span><span class='line'><span class="n">_view1</span><span class="p">.</span><span class="n">layer</span><span class="p">.</span><span class="n">mask</span> <span class="o">=</span> <span class="n">maskLayerView1</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Some different methods you could call are</p>
+
+<figure class='code'><figcaption><span>View 1 Code Block</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="o">**</span><span class="n">Round</span> <span class="n">just</span> <span class="n">the</span> <span class="n">top</span> <span class="n">right</span> <span class="n">of</span> <span class="n">a</span> <span class="n">view</span><span class="o">**</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="k">return</span>  <span class="p">[</span><span class="n">UIBezierPath</span> <span class="nl">bezierPathWithRoundedRect:</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span>
+</span><span class='line'>                                                     <span class="nl">byRoundingCorners:</span><span class="n">UIRectCornerTopRight</span>
+</span><span class='line'>                                                           <span class="nl">cornerRadii:</span><span class="n">CGSizeMake</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>View 1 Code Block</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="o">**</span><span class="n">Round</span> <span class="n">just</span> <span class="n">the</span> <span class="n">whole</span> <span class="n">top</span> <span class="n">of</span> <span class="n">a</span> <span class="n">view</span><span class="o">**</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span>  <span class="p">[</span><span class="n">UIBezierPath</span> <span class="nl">bezierPathWithRoundedRect:</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span>
+</span><span class='line'>                                  <span class="nl">byRoundingCorners:</span><span class="n">UIRectCornerTopRight</span> <span class="o">|</span> <span class="n">UIRectCornerTopLeft</span>
+</span><span class='line'>                                        <span class="nl">cornerRadii:</span><span class="n">CGSizeMake</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)];</span>
+</span><span class='line'>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Round just the top and bottom right of a view</strong></p>
+
+<figure class='code'><figcaption><span>View 1 Code Block</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">return</span>  <span class="p">[</span><span class="n">UIBezierPath</span> <span class="nl">bezierPathWithRoundedRect:</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span>
+</span><span class='line'>                              <span class="nl">byRoundingCorners:</span><span class="n">UIRectCornerTopRight</span> <span class="o">|</span> <span class="n">UIRectCornerTopLeft</span> <span class="o">|</span> <span class="n">UIRectCornerBottomRight</span>
+</span><span class='line'>                                    <span class="nl">cornerRadii:</span><span class="n">CGSizeMake</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><strong>Round everything!</strong></p>
+
+<figure class='code'><figcaption><span>View 1 Code Block</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'>    <span class="k">return</span>  <span class="p">[</span><span class="n">UIBezierPath</span> <span class="nl">bezierPathWithRoundedRect:</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span>
+</span><span class='line'>                                  <span class="nl">byRoundingCorners:</span><span class="n">UIRectCornerAllCorners</span>
+</span><span class='line'>                                        <span class="nl">cornerRadii:</span><span class="n">CGSizeMake</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So there we go a very simple solution to a problem that took me way to long to solve, maybe it might help someone else somewhere.</p>
+
+<p>Thanks for reading,
+You can follow me on twitter at <a href="https://twitter.com/scottmkroberts">@scottmkroberts</a>  or App.Net <a href="https://alpha.app.net/scottr">@scottr</a></p>
+
+
+  </article>
+  <hr>
 
   
   <article class="listing">
