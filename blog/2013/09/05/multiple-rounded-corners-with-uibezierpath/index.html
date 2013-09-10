@@ -106,7 +106,7 @@
 </ul>
 
 
-<p>But what if I wanted UIRectCornerTopLeft &amp; UIRectCornerTopRight To me there was no way I could only select one of these options. I did try the following, Which results in a compiler error.</p>
+<p>But what if I wanted UIRectCornerTopLeft &amp; UIRectCornerTopRight To me there was no way I could only select one of these options, I did try the following which resulted in a compiler error.</p>
 
 <figure class='code'><figcaption><span>Incorrect Code Block</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -117,7 +117,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>So I went off and tried crazy custom UIBezierPath to try and draw my own and not using bezierPathWithRoundedRect. After much failure I randomly tried the Wonderful &lsquo;|&rsquo; character knowing sometimes I can chain commands using this character.</p>
+<p>So I went off and tried crazy custom UIBezierPath to try and draw my own and not using bezierPathWithRoundedRect. After much failure I randomly tried the Wonderful &lsquo;|&rsquo; character knowing sometimes I can chain options using this character.</p>
 
 <h2>Well Look at that</h2>
 
@@ -126,6 +126,15 @@
 <h2>Some examples</h2>
 
 <p><img src="http://scottr.me/images/postImages/UIBiezerPathImage.png" width="250" height="350" title="UIBiezerPathImage" ></p>
+
+<ul>
+<li>Pink/Purple box = View 1</li>
+<li>Green box  = View 2</li>
+<li>Blue box = View 3</li>
+<li>Orange box = View 4</li>
+<li>Red box= View 5</li>
+</ul>
+
 
 <p>So View 1 is set like the following.</p>
 
@@ -158,30 +167,24 @@
 
 <p>Some different methods you could call are</p>
 
-<figure class='code'><figcaption><span>View 1 Code Block</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<p><strong>Round just the top right of a view</strong></p>
+
+<figure class='code'><figcaption><span>View 2 Code Block</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="o">**</span><span class="n">Round</span> <span class="n">just</span> <span class="n">the</span> <span class="n">top</span> <span class="n">right</span> <span class="n">of</span> <span class="n">a</span> <span class="n">view</span><span class="o">**</span>
-</span><span class='line'>
-</span><span class='line'>      <span class="k">return</span>  <span class="p">[</span><span class="n">UIBezierPath</span> <span class="nl">bezierPathWithRoundedRect:</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'>      <span class="k">return</span>  <span class="p">[</span><span class="n">UIBezierPath</span> <span class="nl">bezierPathWithRoundedRect:</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span>
 </span><span class='line'>                                                     <span class="nl">byRoundingCorners:</span><span class="n">UIRectCornerTopRight</span>
 </span><span class='line'>                                                           <span class="nl">cornerRadii:</span><span class="n">CGSizeMake</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)];</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
+<p><strong>Round just the whole top of a view</strong></p>
 
-
-<figure class='code'><figcaption><span>View 1 Code Block</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>View 3 Code Block</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="o">**</span><span class="n">Round</span> <span class="n">just</span> <span class="n">the</span> <span class="n">whole</span> <span class="n">top</span> <span class="n">of</span> <span class="n">a</span> <span class="n">view</span><span class="o">**</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">return</span>  <span class="p">[</span><span class="n">UIBezierPath</span> <span class="nl">bezierPathWithRoundedRect:</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span>
+</pre></td><td class='code'><pre><code class='objective-c'><span class='line'>    <span class="k">return</span>  <span class="p">[</span><span class="n">UIBezierPath</span> <span class="nl">bezierPathWithRoundedRect:</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span>
 </span><span class='line'>                                  <span class="nl">byRoundingCorners:</span><span class="n">UIRectCornerTopRight</span> <span class="o">|</span> <span class="n">UIRectCornerTopLeft</span>
 </span><span class='line'>                                        <span class="nl">cornerRadii:</span><span class="n">CGSizeMake</span><span class="p">(</span><span class="mf">10.0</span><span class="p">,</span> <span class="mf">10.0</span><span class="p">)];</span>
 </span><span class='line'>
@@ -190,7 +193,7 @@
 
 <p><strong>Round just the top and bottom right of a view</strong></p>
 
-<figure class='code'><figcaption><span>View 1 Code Block</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>View 4 Code Block</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='objective-c'><span class='line'><span class="k">return</span>  <span class="p">[</span><span class="n">UIBezierPath</span> <span class="nl">bezierPathWithRoundedRect:</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span>
@@ -201,7 +204,7 @@
 
 <p><strong>Round everything!</strong></p>
 
-<figure class='code'><figcaption><span>View 1 Code Block</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<figure class='code'><figcaption><span>View 5 Code Block</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='objective-c'><span class='line'>    <span class="k">return</span>  <span class="p">[</span><span class="n">UIBezierPath</span> <span class="nl">bezierPathWithRoundedRect:</span><span class="n">view</span><span class="p">.</span><span class="n">bounds</span>
@@ -210,7 +213,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>So there we go a very simple solution to a problem that took me way to long to solve, maybe it might help someone else somewhere.</p>
+<p>So there we go a very simple solution to a problem that took me way too long to solve, maybe it might help someone else somewhere.</p>
 
 <p>Thanks for reading,
 You can follow me on twitter at <a href="https://twitter.com/scottmkroberts">@scottmkroberts</a>  or App.Net <a href="https://alpha.app.net/scottr">@scottr</a></p>

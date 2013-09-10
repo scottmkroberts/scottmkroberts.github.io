@@ -4,7 +4,7 @@
   <title><![CDATA[Category: iOS | My Dev Blog]]></title>
   <link href="scottr.me/blog/categories/ios/atom.xml" rel="self"/>
   <link href="scottr.me/"/>
-  <updated>2013-09-10T01:11:27+01:00</updated>
+  <updated>2013-09-10T12:21:19+01:00</updated>
   <id>scottr.me/</id>
   <author>
     <name><![CDATA[Scott Roberts]]></name>
@@ -31,7 +31,7 @@
 </ul>
 
 
-<p>But what if I wanted UIRectCornerTopLeft &amp; UIRectCornerTopRight To me there was no way I could only select one of these options. I did try the following, Which results in a compiler error.</p>
+<p>But what if I wanted UIRectCornerTopLeft &amp; UIRectCornerTopRight To me there was no way I could only select one of these options, I did try the following which resulted in a compiler error.</p>
 
 <p>``` objective-c Incorrect Code Block
   [UIBezierPath bezierPathWithRoundedRect:self.view.bounds</p>
@@ -42,7 +42,7 @@
 
 <p>```</p>
 
-<p>So I went off and tried crazy custom UIBezierPath to try and draw my own and not using bezierPathWithRoundedRect. After much failure I randomly tried the Wonderful &lsquo;|&rsquo; character knowing sometimes I can chain commands using this character.</p>
+<p>So I went off and tried crazy custom UIBezierPath to try and draw my own and not using bezierPathWithRoundedRect. After much failure I randomly tried the Wonderful &lsquo;|&rsquo; character knowing sometimes I can chain options using this character.</p>
 
 <h2>Well Look at that</h2>
 
@@ -51,6 +51,15 @@
 <h2>Some examples</h2>
 
 <p><img class="<a" src="href="http://scottr.me/images/postImages/UIBiezerPathImage.png">http://scottr.me/images/postImages/UIBiezerPathImage.png</a>" width="250" height="350" title="UIBiezerPathImage" ></p>
+
+<ul>
+<li>Pink/Purple box = View 1</li>
+<li>Green box  = View 2</li>
+<li>Blue box = View 3</li>
+<li>Orange box = View 4</li>
+<li>Red box= View 5</li>
+</ul>
+
 
 <p>So View 1 is set like the following.</p>
 
@@ -74,8 +83,8 @@ _view1.layer.mask = maskLayerView1;
 
 <p>Some different methods you could call are</p>
 
-<p>``` objective-c View 1 Code Block
-<strong>Round just the top right of a view</strong></p>
+<p><strong>Round just the top right of a view</strong>
+``` objective-c View 2 Code Block</p>
 
 <pre><code>    return  [UIBezierPath bezierPathWithRoundedRect:view.bounds
                                                    byRoundingCorners:UIRectCornerTopRight
@@ -84,8 +93,8 @@ _view1.layer.mask = maskLayerView1;
 
 <p>```</p>
 
-<p>``` objective-c View 1 Code Block
-<strong>Round just the whole top of a view</strong></p>
+<p><strong>Round just the whole top of a view</strong>
+``` objective-c View 3 Code Block</p>
 
 <pre><code>return  [UIBezierPath bezierPathWithRoundedRect:view.bounds
                               byRoundingCorners:UIRectCornerTopRight | UIRectCornerTopLeft
@@ -95,7 +104,7 @@ _view1.layer.mask = maskLayerView1;
 <p>```</p>
 
 <p><strong>Round just the top and bottom right of a view</strong>
-``` objective-c View 1 Code Block</p>
+``` objective-c View 4 Code Block</p>
 
 <pre><code>return  [UIBezierPath bezierPathWithRoundedRect:view.bounds
                               byRoundingCorners:UIRectCornerTopRight | UIRectCornerTopLeft | UIRectCornerBottomRight
@@ -105,7 +114,7 @@ _view1.layer.mask = maskLayerView1;
 <p>```</p>
 
 <p><strong>Round everything!</strong>
-``` objective-c View 1 Code Block</p>
+``` objective-c View 5 Code Block</p>
 
 <pre><code>return  [UIBezierPath bezierPathWithRoundedRect:view.bounds
                               byRoundingCorners:UIRectCornerAllCorners
@@ -114,7 +123,7 @@ _view1.layer.mask = maskLayerView1;
 
 <p>```</p>
 
-<p>So there we go a very simple solution to a problem that took me way to long to solve, maybe it might help someone else somewhere.</p>
+<p>So there we go a very simple solution to a problem that took me way too long to solve, maybe it might help someone else somewhere.</p>
 
 <p>Thanks for reading,
 You can follow me on twitter at <a href="https://twitter.com/scottmkroberts">@scottmkroberts</a>  or App.Net <a href="https://alpha.app.net/scottr">@scottr</a></p>
